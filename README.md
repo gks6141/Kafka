@@ -1,7 +1,7 @@
 # Kafka
 
 
-- Kafka에 대해 개념과 이론 😄
+- 22.05.06~ Apache Kafka 개념과 이론 😄
 
 
 <br>
