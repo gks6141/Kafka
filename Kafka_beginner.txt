@@ -1,0 +1,26 @@
+##kafka 실행
+- zookeeper를 실행하고 난 뒤 kafka 실행
+zookeeper port 기본적으로 2181사용
+export KAFKA_HEAPS_OPTS="-Xmx400m -Xms400m"
+cd kafka_test/kafka_2.13-2.8.1
+./bin/zookeeper-server-start.sh config/zookeeper.properties  --> zookeeper 실행
+./bin/kafka-server-start.sh config/kafka.properties --> kafka 실행
+
+##topic 생성
+cd bin
+./kafka-topics.sh --create --bootstrap-server localhost:9092 --topic {create_topic_name}
+./kafka-topics.sh --list --bootstrap-server localhost:9092
+
+##kafka message 보내기
+./kafka-console-producer.sh --bootstrap-server localhost:9092 --topic {topic_name}
+
+##kafka message 받기
+./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {topic_name}
+./kafka-console-consumer.sh --bootstrap-server localhost:9092 --topic {topic_name} -from-beginning --> 받았던 message check
+
+zookeeper broker 확인
+./bin/zookeeper-shell.sh localhost:2181
+ls /
+ls /brokers
+ls /brokers/ids
+ls /brokers/topics  -->__consumer_offset: kafka 히든 토픽에 메시지를 처리하고 다시 커밋 --> 제대로 처리하지 못하는 상태일떄 offset을 참조해서 해당 offset부터 출력
